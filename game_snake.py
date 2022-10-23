@@ -21,6 +21,7 @@ class Game:
         self.fruit_position = [random.randrange(X), random.randrange(X)]
 
     def move(self, direction):
+        # after first point, append previous position, and trim to the score, so list is always as long as snake
         if self.body:
             self.previous.append([self.position[0], self.position[1]])
             self.previous = self.previous[-len(self.body):]
@@ -34,11 +35,9 @@ class Game:
         if direction == "down":
             self.position[1] += 1
 
+        # after move, change position of each snake square
         for i in range(0, len(self.body)):
-            if i == 0:
-                self.body[0] = self.previous[0]
-            if i >= 1:
-                self.body[i] = self.previous[i]
+            self.body[i] = self.previous[i]
 
     # collision detection with walls and snake himself
     def wall_detection(self):
