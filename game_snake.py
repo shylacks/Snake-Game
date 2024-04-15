@@ -2,23 +2,23 @@ import numpy as np
 import random
 
 # Globals
-X = 10
-BOARD = X, X
-HEAD_POS = [X//2, X//2]
+HEIGHT, WIDTH = 25, 25
+BOARD = HEIGHT, WIDTH
+HEAD_COORDINATES = [HEIGHT // 2, WIDTH // 2]
 
 
 class Game:
     def __init__(self):
-        self.board = np.zeros(BOARD)
+        self.board = np.zeros(BOARD)  # init empty board
 
         # snake
-        self.position = HEAD_POS
+        self.position = HEAD_COORDINATES
         self.previous = []
         self.body = []
 
         self.direction = "none"
         self.game_over = False
-        self.fruit_position = [random.randrange(X), random.randrange(X)]
+        self.fruit_position = [random.randrange(WIDTH), random.randrange(HEIGHT)]
 
     def move(self, direction):
         # after first point, append previous position, and trim to the score, so list is always as long as snake
@@ -41,7 +41,7 @@ class Game:
 
     # collision detection with walls and snake himself
     def wall_detection(self):
-        if self.position[0] >= X or self.position[0] < 0 or self.position[1] >= X or self.position[1] < 0:
+        if self.position[0] >= WIDTH or self.position[0] < 0 or self.position[1] >= HEIGHT or self.position[1] < 0:
             self.game_over = True
 
     def snake_hit_self(self):
@@ -51,10 +51,9 @@ class Game:
     # check for point, create new fruit,
     def point(self):
         if self.position == self.fruit_position:
-
-            new_fruit_position = [random.randrange(X), random.randrange(X)]
+            new_fruit_position = [random.randrange(WIDTH), random.randrange(HEIGHT)]
             while new_fruit_position == self.position or new_fruit_position in self.body:
-                new_fruit_position = [random.randrange(X), random.randrange(X)]
+                new_fruit_position = [random.randrange(WIDTH), random.randrange(HEIGHT)]
 
             # add position to body, then create new fruit
             self.body.append(self.fruit_position)
