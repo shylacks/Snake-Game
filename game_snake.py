@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 # Globals
-HEIGHT, WIDTH = 25, 25
+HEIGHT, WIDTH = 15, 15
 BOARD = HEIGHT, WIDTH
 HEAD_COORDINATES = [HEIGHT // 2, WIDTH // 2]
 
